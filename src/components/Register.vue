@@ -21,22 +21,22 @@
         </span>
       </div>
       <div class="group">
-        <label for="phone">* Telefone:</label>
-        <input type="tel" name="phone" placeholder="Digite seu telefone" v-model="user.phone">
+        <label for="phone">* Celular:</label>
+        <input type="tel" name="phone" placeholder="Digite seu telefone" v-model="user.phone" v-mask="'(##) #####-####'">
          <span class="label-error" v-if="errorClass.phone">
           {{errors.phone}}
         </span>
       </div>
       <div class="group">
         <label for="rg">* RG:</label>
-        <input type="text" name="rg" placeholder="Digite seu RG">
+        <input type="text" name="rg" placeholder="Digite seu RG" v-model="user.rg">
         <span class="label-error" v-if="errorClass.rg">
           {{errors.rg}}
         </span>
       </div>
       <div class="group">
         <label for="cpf">* CPF:</label>
-        <input type="text" name="cpf" placeholder="Digite seu CPF">
+        <input type="text" name="cpf" placeholder="Digite seu CPF" v-model="user.cpf" v-mask="'###.###.###-##'">
         <span class="label-error" v-if="errorClass.cpf">
           {{errors.cpf}}
         </span>
