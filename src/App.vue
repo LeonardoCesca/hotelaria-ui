@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <Register title="Formulário de Cadastro"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Register from './components/Register'
 
 export default {
   name: 'app',
-  components: {
-    Register 
-  }
 }
 </script>
 

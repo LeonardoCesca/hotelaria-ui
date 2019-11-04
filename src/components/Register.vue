@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <h1>{{ title }}</h1>
+    <h1>Formulário de Cadastro</h1>
     <form class="register__form" @submit.prevent="validateForm" method="post">
       <div class="group">
         <label for="name">* Nome:</label>
