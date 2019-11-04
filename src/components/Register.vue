@@ -138,6 +138,9 @@ export default {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  position: absolute;
+  width: 80%;
+  right: 0;
 }
 
 .register__form {

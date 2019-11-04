@@ -12,5 +12,9 @@ export default {
 </script>
 
 <style scoped>
-
+.home {
+    position: absolute;
+    width: 80%;
+    right: 0;
+}
 </style>
