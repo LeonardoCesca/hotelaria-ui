@@ -1,5 +1,5 @@
-import Register from './components/Register'
-import Home from './components/Home'
+import Register from './pages/Register'
+import Home from './pages/Home'
 
 const routes = 
 [
