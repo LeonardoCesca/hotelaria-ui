@@ -3,22 +3,10 @@ import App from './App.vue'
 import VueMask from 'v-mask'
 import VueRouter from 'vue-router'
 
-import Register from './components/Register'
-import Home from './components/Home'
+import routes from './routes'
 
 Vue.use(VueMask);
 Vue.use(VueRouter);
-
-const routes = [
-  {
-    path: '/',
-    component: Home
-  },
-  {
-    path: '/cadastro',
-    component: Register
-  }
-]
 
 const router = new VueRouter({
   routes
