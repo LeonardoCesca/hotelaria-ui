@@ -9,6 +9,9 @@
               <li class="nav__item">
                 <router-link to="/cadastro">Cadastro</router-link>
               </li>
+              <li class="nav__item">
+                <router-link to="/reservas">Reservas</router-link>
+              </li>
           </ul>
       </nav>
         
