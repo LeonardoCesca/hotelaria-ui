@@ -12,6 +12,9 @@
               <li class="nav__item">
                 <router-link to="/reservas">Reservas</router-link>
               </li>
+              <li class="nav__item">
+                <router-link to="/clientes">Clientes</router-link>
+              </li>
           </ul>
       </nav>
         
