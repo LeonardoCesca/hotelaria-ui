@@ -7,13 +7,16 @@
                 <router-link to="/">Página Inicial</router-link>
               </li>
               <li class="nav__item">
-                <router-link to="/cadastro">Cadastro</router-link>
-              </li>
-              <li class="nav__item">
-                <router-link to="/reservas">Reservas</router-link>
+                <router-link to="/cadastro">Cadastro Clientes</router-link>
               </li>
               <li class="nav__item">
                 <router-link to="/clientes">Clientes</router-link>
+              </li>
+              <li class="nav__item">
+                <router-link to="/efetuar-reserva">Efetuar Reserva</router-link>
+              </li>
+              <li class="nav__item">
+                <router-link to="/reservas">Reservas</router-link>
               </li>
           </ul>
       </nav>

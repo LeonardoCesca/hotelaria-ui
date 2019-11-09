@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <h1 class="register__title">Formulário de Cadastro</h1>
+    <h1 class="register__title">Cadastro de Novos Clientes</h1>
     <Form />
   </div>
 </template>

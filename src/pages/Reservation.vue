@@ -1,13 +1,17 @@
 <template>
   <div class="reservation">
       <h1>Reservas</h1>
+      <ReservationForm />
   </div>
 </template>
 
 <script>
+import ReservationForm from '../components/ReservationForm'
 export default {
   name: 'reservation',
- 
+  components: {
+    ReservationForm
+  },
 }
 </script>
 
