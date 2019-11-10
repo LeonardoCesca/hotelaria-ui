@@ -23,7 +23,7 @@ export default {
       width: 76%;
       right: 0;
       padding:20px;
-      color: #1E90FF;
+      color: black;
   }
 </style>
 
