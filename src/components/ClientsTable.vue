@@ -16,12 +16,12 @@
         enabled: true,
     }">
     <div slot="selected-row-actions">
-        <button>Disativa</button>
+        <button class="button-desativo">Disativa</button>
     </div>
     <template slot="table-row" slot-scope="props">
       <span v-if="props.column.field == 'buttons'">
-        <button type="button" class="btn btn-primary" style="margin-right: 20px;"> Editar </button>
-        <button type="button" class="btn btn-primary"> Deletar </button>
+        <button type="button" class="button button-edit" style="margin-right: 20px;"> Editar </button>
+        <button type="button" class="button button-delete"> Deletar </button>
       </span>
       <span v-else>
           {{props.formattedRow[props.column.field]}}
@@ -72,5 +72,36 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.button {
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.button-delete {
+    background-color: #f44336;
+}
+
+.button-edit {
+    background-color: #4CAF50;
+}
+
+.button-desativo {
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 1px;
+  background-color: #f44336;
+}
+</style>
 
 

@@ -1,20 +1,27 @@
 <template>
   <div class="booking">
       <h1>Booking</h1>
+      <BookingTable />
   </div>
 </template>
 
 <script>
-export default {
-  name: 'booking',
- 
-}
+  import BookingTable from '../components/BookingTable';
+
+  export default {
+    name: 'booking',
+    components: {
+      BookingTable,
+    }
+  }
 </script>
 
 <style scoped>
-.booking {
-    position: absolute;
-    width: 80%;
-    right: 0;
-}
+  .booking {
+      position: absolute;
+      width: 76%;
+      right: 0;
+      padding:20px;
+      color: black;
+  }
 </style>
