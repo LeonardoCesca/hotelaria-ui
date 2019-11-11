@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-      <h1>Home</h1>
+      <img src=".././assets/hotel.jpg">
+      <h1>Sistema de Hotelaria</h1>
   </div>
 </template>
 
