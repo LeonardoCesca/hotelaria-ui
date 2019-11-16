@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Reservation from './pages/Reservation'
 import Clients from './pages/Clients'
 import Booking from './pages/Booking'
+import Checkin from './pages/Checkin'
 
 const routes = 
 [
@@ -25,6 +26,10 @@ const routes =
     {
         path: '/reservas',
         component: Booking
+    },
+    {
+        path: '/checkin',
+        component: Checkin
     }
 ]
 
