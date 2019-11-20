@@ -1,11 +1,12 @@
 <template>
   <div v-if="showModal">
     <div id="modal">
+        <p> Detalhes Cadastro do Cliente </p>
         <div id="client">
-        <p>Nome : {{client.name}}</p>
-        <p>Quantidades de Quartos : {{client.quartos}}</p>
-        <p>Data Entrada : {{client.dataEntrada}}</p>
-        <p>Data Saída: {{client.dataSaida}}</p>
+          <p>Nome : {{client.name}}</p>
+          <p>Quantidades de Quartos : {{client.quartos}}</p>
+          <p>Data Entrada : {{client.dataEntrada}}</p>
+          <p>Data Saída: {{client.dataSaida}}</p>
         </div>
       <button class="button" @click="hide">Close</button>
     </div> 

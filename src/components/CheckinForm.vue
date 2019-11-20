@@ -16,10 +16,10 @@
     </multiselect>
     <pre class="language-json">
         <div class="information" v-if="value !== null">
-        <p>Nome : {{value.name}}</p>
-        <p>Quantidades de Quartos : {{value.quartos}}</p>
-        <p>Data Entrada : {{value.dataEntrada}}</p>
-        <p>Data Saída: {{value.dataSaida}}</p>
+          <p>Nome : {{value.name}}</p>
+          <p>Quantidades de Quartos : {{value.quartos}}</p>
+          <p>Data Entrada : {{value.dataEntrada}}</p>
+          <p>Data Saída: {{value.dataSaida}}</p>
         </div>
     </pre>
     <button class="button" type="submit">Check-in</button>

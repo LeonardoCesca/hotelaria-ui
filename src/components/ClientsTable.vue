@@ -20,7 +20,7 @@
     </div>
     <template slot="table-row" slot-scope="props">
       <span v-if="props.column.field == 'buttons'">
-        <button type="button" class="button button-edit" style="margin-right: 20px;"> Editar </button>
+        <button type="button" class="button button-edit" @click="openModal(props.row)" style="margin-right: 20px;"> Editar </button>
         <button type="button" class="button button-delete"> Deletar </button>
       </span>
       <span v-else>
@@ -28,7 +28,7 @@
       </span>
     </template>
     </vue-good-table>
-    <ModalDetails/>
+    <modal ref="modal"></modal>
   </div>
 </template>
 
@@ -36,11 +36,13 @@
 <script>
 import { VueGoodTable } from 'vue-good-table'; 
 import 'vue-good-table/dist/vue-good-table.css';
+import modal from './ModalEdit.vue'
 
 export default {
   name: 'clients',
   components: {
       VueGoodTable,
+      modal,
   },
   data(){
     return {
@@ -71,6 +73,11 @@ export default {
       ],
     };
   },
+  methods: {
+    openModal: function (entry) {
+      this.$refs.modal.show(entry) 
+    }
+  }
 };
 </script>
 
