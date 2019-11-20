@@ -28,6 +28,7 @@
       </span>
     </template>
     </vue-good-table>
+    <ModalDetails/>
   </div>
 </template>
 
@@ -38,9 +39,9 @@ import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
   name: 'clients',
-    components: {
-        VueGoodTable,
-    },
+  components: {
+      VueGoodTable,
+  },
   data(){
     return {
       columns: [

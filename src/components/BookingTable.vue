@@ -14,7 +14,7 @@
     }">
     <template slot="table-row" slot-scope="props">
       <span v-if="props.column.field == 'buttons'">
-        <button type="button" class="button button-details" style="margin-right: 20px;"> Detalhes </button>
+        <button type="button" class="button button-details" style="margin-right: 20px;" @click="openModal(props.row)" > Detalhes </button>
         <button type="button" class="button button-delete"> Cancelar </button>
       </span>
       <span v-else>
@@ -22,6 +22,7 @@
       </span>
     </template>
     </vue-good-table>
+    <modal ref="modal"></modal>
   </div>
 </template>
 
@@ -29,12 +30,14 @@
 <script>
 import { VueGoodTable } from 'vue-good-table'; 
 import 'vue-good-table/dist/vue-good-table.css';
+import modal from './ModalDetails.vue'
 
 export default {
   name: 'booking',
-    components: {
-        VueGoodTable,
-    },
+  components: {
+      VueGoodTable,
+      modal,
+  },
   data(){
     return {
       columns: [
@@ -72,6 +75,11 @@ export default {
       ],
     };
   },
+  methods: {
+    openModal: function (entry) {
+      this.$refs.modal.show(entry) 
+    }
+  }
 };
 </script>
 
