@@ -11,13 +11,7 @@
     :pagination-options="{
         enabled: true,
         mode: 'records'
-    }"
-    :select-options="{ 
-        enabled: true,
     }">
-    <div slot="selected-row-actions">
-        <button class="button-desativo">Disativa</button>
-    </div>
     <template slot="table-row" slot-scope="props">
       <span v-if="props.column.field == 'buttons'">
         <button type="button" class="button button-edit" @click="openModal(props.row)" style="margin-right: 20px;"> Editar </button>

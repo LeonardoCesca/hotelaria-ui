@@ -1,7 +1,7 @@
 <template>
 <div class="checkin-form">
     <label class="typo__label">
-     <p>Efetuar Check-in</p>
+     <p>Efetuar Check-out</p>
     </label>
     <multiselect v-model="value" 
         track-by="name" 
@@ -20,6 +20,7 @@
           <p>Quantidades de Quartos : {{value.quartos}}</p>
           <p>Data Entrada : {{value.dataEntrada}}</p>
           <p>Data Saída: {{value.dataSaida}}</p>
+          <p>Pagamento: R$ {{value.bill}}</p>
         </div>
     </pre>
     <button class="button" type="submit">Check-in</button>
@@ -37,15 +38,16 @@ export default {
     return {
       value: null,
       clients: [
-        { id:1, name: "Tom Cruz", quartos: "1", dataEntrada: "2019-11-20", dataSaida: "2019-11-22"},
-        { id:2, name: "Mike Mouse", quartos: "1", dataEntrada: "2019-11-21", dataSaida: "2019-11-27"},
-        { id:3, name: "Mariya Giordani",quartos: "4", dataEntrada: "2019-11-30", dataSaida: "2019-12-22"},
-        { id:4, name: "Will Smith",quartos: "5", dataEntrada: "2019-11-10", dataSaida: "2019-11-22"},
-        { id:5, name: "Jon Jon", quartos: "6", dataEntrada: "2019-11-04", dataSaida: "2019-11-20"},
+        { id:1, name: "Tom Cruz", quartos: "1", dataEntrada: "2019-11-20", dataSaida: "2019-11-22", bill: "400"},
+        { id:2, name: "Mike Mouse", quartos: "1", dataEntrada: "2019-11-21", dataSaida: "2019-11-27", bill: "408"},
+        { id:3, name: "Mariya Giordani",quartos: "4", dataEntrada: "2019-11-30", dataSaida: "2019-12-22", bill: "500"},
+        { id:4, name: "Will Smith",quartos: "5", dataEntrada: "2019-11-10", dataSaida: "2019-11-22", bill: "670"},
+        { id:5, name: "Jon Jon", quartos: "6", dataEntrada: "2019-11-04", dataSaida: "2019-11-20", bill: "300"},
       ]
     }
-  }
+  },
 };
+
 </script>
 <style scoped>
 .checkin-form {
