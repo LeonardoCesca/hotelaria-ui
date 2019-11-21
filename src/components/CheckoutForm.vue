@@ -23,7 +23,7 @@
           <p>Pagamento: R$ {{value.bill}}</p>
         </div>
     </pre>
-    <button class="button" type="submit">Check-in</button>
+    <button class="button" type="submit">Check-out</button>
 </div>
 </template>
 
