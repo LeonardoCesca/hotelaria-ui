@@ -152,7 +152,7 @@ export default {
       this.responseUsers.push(this.user.address);
 
       axios
-        .post("https://jsonplaceholder.typicode.com/posts", {
+        .post("https://cadastro-de-cliente.herokuapp.com/customer", {
           nome: this.user.name,
           telefone: this.user.phone,
           endereco: this.user.address,
