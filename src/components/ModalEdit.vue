@@ -27,7 +27,7 @@
                     </div>
                     <div class="button-margin">
                         <button class="button button-details" type="submit">Cadastrar</button>
-                        <button class="button" @click="hide">Close</button>
+                        <button class="button" @click="hide">Fechar</button>
                     </div>
                 </div> 
             </form>
