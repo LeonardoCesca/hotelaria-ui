@@ -1,73 +1,74 @@
 <template>
-<div class="checkin-form">
+  <div class="checkin-form">
     <label class="typo__label">
-     <p>Efetuar Check-out</p>
+      <p>Efetuar Check-out</p>
     </label>
-    <multiselect v-model="value" 
-        track-by="name" 
-        label="name" 
-        placeholder="Nome do Cliente" 
-        :options="clients" 
-        :searchable="false" 
-        :allow-empty="false">
-        <template slot-scope="{ client }">
-        <strong>{{ client.name }}</strong>
-        </template>
+    <multiselect
+      v-model="value"
+      :options="clients"
+      placeholder="Nome do Cliente"
+      label="title"
+      :multiple="false"
+    >
+      <template slot-scope="{ clients }">
+        <strong>{{ clients }}</strong>
+      </template>
     </multiselect>
     <pre class="language-json">
         <div class="information" v-if="value !== null">
-          <p>Nome : {{value.name}}</p>
-          <p>Quantidades de Quartos : {{value.quartos}}</p>
-          <p>Data Entrada : {{value.dataEntrada}}</p>
-          <p>Data Saída: {{value.dataSaida}}</p>
-          <p>Pagamento: R$ {{value.bill}}</p>
+          <p>Nome : {{value.id}}</p>
+          <p>Quantidades de Quartos : {{value.title}}</p>
+          <p>Data Entrada : {{value.userId}}</p>
+          <p>Data Saída: {{value.userId}}</p>
+          <p>Pagamento: R$ {{value.id}}</p>
         </div>
     </pre>
     <button class="button" type="submit">Check-out</button>
-</div>
+  </div>
 </template>
 
 
 <script>
-import Multiselect from 'vue-multiselect'
-import 'vue-multiselect/dist/vue-multiselect.min.css';
+import axios from "axios";
+import Multiselect from "vue-multiselect";
+import "vue-multiselect/dist/vue-multiselect.min.css";
 
 export default {
   components: { Multiselect },
-  data(){
+  data() {
     return {
       value: null,
-      clients: [
-        { id:1, name: "Tom Cruz", quartos: "1", dataEntrada: "2019-11-20", dataSaida: "2019-11-22", bill: "400"},
-        { id:2, name: "Mike Mouse", quartos: "1", dataEntrada: "2019-11-21", dataSaida: "2019-11-27", bill: "408"},
-        { id:3, name: "Mariya Giordani",quartos: "4", dataEntrada: "2019-11-30", dataSaida: "2019-12-22", bill: "500"},
-        { id:4, name: "Will Smith",quartos: "5", dataEntrada: "2019-11-10", dataSaida: "2019-11-22", bill: "670"},
-        { id:5, name: "Jon Jon", quartos: "6", dataEntrada: "2019-11-04", dataSaida: "2019-11-20", bill: "300"},
-      ]
-    }
+      clients: []
+    };
   },
+  created() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/albums")
+      .then(response => (this.clients = response.data));
+  }
 };
 
 </script>
+
 <style scoped>
 .checkin-form {
-    margin:50px;
-    padding: 40px 200px;
-    border: 2px solid black;
-    border-radius: 8px;
-    background-color: #E6E6FA;
+  margin: 50px;
+  padding: 40px 200px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #e6e6fa;
 }
 
 .information {
-    border: 2px solid grey;
-    background-color: #F0F8FF;
-    border-radius: 8px;
+  border: 2px solid grey;
+  background-color: #f0f8ff;
+  border-radius: 8px;
 }
 
 p {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 19px;
-    font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .button {
@@ -81,6 +82,6 @@ p {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 8px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 </style>
