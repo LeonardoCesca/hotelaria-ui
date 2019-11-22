@@ -8,7 +8,7 @@
           <p>Data Entrada : {{client.dataEntrada}}</p>
           <p>Data Saída: {{client.dataSaida}}</p>
         </div>
-      <button class="button" @click="hide">Close</button>
+      <button class="button" @click="hide">Fechar</button>
     </div> 
   </div>
 </template>
