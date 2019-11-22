@@ -44,11 +44,11 @@
       </div>
       <div class="group">
         <label for="cep">CEP:</label>
-        <input type="text" name="cep" placeholder="Digite o seu CEP" />
+        <input type="text" name="cep" placeholder="Digite o seu CEP" v-model="user.cep" />
       </div>
       <div class="group">
         <label for="address">Endereço:</label>
-        <input type="text" name="address" placeholder="Digite seu endereço" />
+        <input type="text" name="address" placeholder="Digite seu endereço" v-model="user.address" />
       </div>
       <button class="register__btn" type="submit">Cadastrar</button>
     </form>
@@ -67,7 +67,9 @@ export default {
         email: "",
         phone: "",
         rg: "",
-        cpf: ""
+        cpf: "",
+        cep: "",
+        address: "",
       },
       errors: {
         name: undefined,
@@ -146,11 +148,16 @@ export default {
       this.responseUsers.push(this.user.phone);
       this.responseUsers.push(this.user.rg);
       this.responseUsers.push(this.user.cpf);
+      this.responseUsers.push(this.user.cep);
+      this.responseUsers.push(this.user.address);
 
       axios
-        .post("http://jsonplaceholder.typicode.com/posts", {
-          title: this.user.name,
-          body: this.user.rg
+        .post("https://jsonplaceholder.typicode.com/posts", {
+          nome: this.user.name,
+          telefone: this.user.phone,
+          endereco: this.user.address,
+          rg: this.user.rg,
+          cpf: this.user.cpf,
         })
         .catch(e => {
           alert(e);
