@@ -143,6 +143,7 @@ export default {
         !!this.user.cpf
       ) {
         this.save();
+        this.scrollToBottom();
         this.saveSuccess = true;
         this.clearForm();
       }
@@ -189,8 +190,12 @@ export default {
 
       setTimeout(() => {
         this.saveSuccess = false;
-      }, 3000);
+      }, 5000);
     },
+
+    scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+    }
   }
 };
 </script>
