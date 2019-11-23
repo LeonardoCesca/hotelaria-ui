@@ -51,6 +51,9 @@
         <input type="text" name="address" placeholder="Digite seu endereço" v-model="user.address" />
       </div>
       <button class="register__btn" type="submit">Cadastrar</button>
+    <div class="modal-success" v-if="saveSuccess">
+      <p>Formulário enviado com sucesso!</p>
+    </div>
     </form>
   </div>
 </template>
@@ -85,6 +88,7 @@ export default {
         rg: false,
         cpf: false
       },
+      saveSuccess: false,
       message: undefined,
       responseUsers: []
     };
@@ -139,6 +143,8 @@ export default {
         !!this.user.cpf
       ) {
         this.save();
+        this.saveSuccess = true;
+        this.clearForm();
       }
     },
 
@@ -162,7 +168,29 @@ export default {
         .catch(e => {
           alert(e);
         });
-    }
+    },
+
+    clearForm() {
+      if (
+        !!this.user.name &&
+        !!this.user.email &&
+        !!this.user.phone &&
+        !!this.user.rg &&
+        !!this.user.cpf
+      ) {
+        this.user.name = '';
+        this.user.email = '';
+        this.user.phone = '';
+        this.user.rg = '';
+        this.user.cpf = '';
+        this.user.cep = '';
+        this.user.address = '';
+      }
+
+      setTimeout(() => {
+        this.saveSuccess = false;
+      }, 3000);
+    },
   }
 };
 </script>
@@ -219,4 +247,13 @@ export default {
   color: #c93211;
   padding-top: 4px;
 }
+
+.modal-success {
+  width: 100px;
+  background-color: green;
+  color: #fff;
+  width: 350px;
+  margin-top: 20px;
+}
+
 </style>
