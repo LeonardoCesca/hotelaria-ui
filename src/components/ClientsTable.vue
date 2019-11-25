@@ -13,6 +13,9 @@
         mode: 'records'
     }">
     <template slot="table-row" slot-scope="props">
+      <span v-if="props.column.field == 'name'">{{props.row.nome}}</span>
+      <span v-if="props.column.field == 'CPF'">{{props.row.cpf}}</span>
+      <span v-if="props.column.field == 'RG'">{{props.row.rg}}</span>
       <span v-if="props.column.field == 'buttons'">
         <button type="button" class="button button-edit" @click="openModal(props.row)" style="margin-right: 20px;"> Editar </button>
         <button type="button" class="button button-delete"> Deletar </button>
@@ -28,6 +31,7 @@
 
 
 <script>
+import axios from 'axios';
 import { VueGoodTable } from 'vue-good-table'; 
 import 'vue-good-table/dist/vue-good-table.css';
 import modal from './ModalEdit.vue'
@@ -58,18 +62,21 @@ export default {
           field: 'buttons',
         },
       ],
-      rows: [
-        { id:1, name: "Tom Cruz", CPF: "646646464646464", RG: "63636363367", Ativo: "true", buttons: "" },
-        { id:2, name: "Mike Mouse", CPF: "8865624624", RG: "23452314321", Ativo: "true", buttons: ""},
-        { id:3, name: "Mariya Giordani", CPF: "351351534513", RG: "4354353453", Ativo: "false", buttons: ""},
-        { id:4, name: "Will Smith", CPF: "353534534345", RG: "456345345", Ativo: "false", buttons: ""},
-        { id:5, name: "Jon Jon", CPF: "345353535435", RG: "34535345353", Ativo: "true", buttons: ""},
-      ],
+      rows: [],
     };
+  },
+  mounted() {
+    this.getClients();
   },
   methods: {
     openModal: function (entry) {
       this.$refs.modal.show(entry) 
+    },
+    getClients() {
+      return axios.get('https://cadastro-de-cliente.herokuapp.com/customer')
+                .then(response => {
+                  this.rows = response.data;
+                });
     }
   }
 };
