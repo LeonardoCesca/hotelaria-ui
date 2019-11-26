@@ -44,7 +44,7 @@
       </div>
       <div class="group">
         <label for="cep">CEP:</label>
-        <input type="text" name="cep" placeholder="Digite o seu CEP" v-model="user.cep" />
+        <input type="text" name="cep" placeholder="Digite o seu CEP" v-model="user.cep"  v-mask="'#########'"/>
       </div>
       <div class="group">
         <label for="address">Endereço:</label>
@@ -62,6 +62,7 @@ export default {
   name: "forms",
   data() {
     return {
+      alert: "",
       user: {
         name: "",
         email: "",
@@ -138,7 +139,11 @@ export default {
         !!this.user.rg &&
         !!this.user.cpf
       ) {
-        this.save();
+        var response = this.save();
+        if(response === 200) {
+          alert("Cliente cadastrado com")
+        }
+        event.target.reset();
       }
     },
 
