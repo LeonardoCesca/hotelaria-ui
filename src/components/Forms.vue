@@ -254,7 +254,6 @@ export default {
 }
 
 .modal-success {
-  width: 100px;
   background-color: green;
   color: #fff;
   width: 350px;
