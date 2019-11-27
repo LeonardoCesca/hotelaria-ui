@@ -18,7 +18,7 @@
       <span v-if="props.column.field == 'RG'">{{props.row.rg}}</span>
       <span v-if="props.column.field == 'buttons'">
         <button type="button" class="button button-edit" @click="openModal(props.row)" style="margin-right: 20px;"> Editar </button>
-        <button type="button" class="button button-delete" @click="deleteCliente(props.row, props.row.cpf)" > Deletar </button>
+        <button type="button" class="button button-delete" @click="deleteCliente(props.row.cpf)" > Deletar </button>
       </span>
       <span v-else>
           {{props.formattedRow[props.column.field]}}
@@ -78,13 +78,19 @@ export default {
                   this.rows = response.data;
                 });
     },
-    deleteCliente(row, cpf) {
-      axios.delete('https://cadastro-de-cliente.herokuapp.com/customer')
-      .then(response => {
-        this.rows.splice(cpf);
-        return response;
-      })
-      window.location.reaload();
+    deleteCliente(cpf) {
+        axios.delete("https://cadastro-de-cliente.herokuapp.com/customer", 
+          {headers: {
+            "Content-Type": "application/json"
+          },
+           data: { cpf }
+        }).catch(e => {
+          alert(e);
+        }); 
+        
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
     }
   }
 };
