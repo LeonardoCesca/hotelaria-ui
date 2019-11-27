@@ -15,7 +15,7 @@
     <template slot="table-row" slot-scope="props">
       <span v-if="props.column.field == 'buttons'">
         <button type="button" class="button button-details" style="margin-right: 20px;" @click="openModal(props.row)" > Detalhes </button>
-        <button type="button" class="button button-delete"> Cancelar </button>
+        <button type="button" class="button button-delete"> Deletar </button>
       </span>
       <span v-else>
           {{props.formattedRow[props.column.field]}}
