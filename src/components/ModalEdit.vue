@@ -108,14 +108,24 @@ Vue.use(FlashMessage);
         },
 
         updateClients() {
+          this.clients.push(this.client.nome);
+          this.clients.push(this.client.rg);
+          this.clients.push(this.client.cpf);
+
           axios.put("https://cadastro-de-cliente.herokuapp.com/customer", {
-            nome: this.client.nome,
-            rg: this.client.rg,
-            cpf: this.client.cpf,
-            })
-            .catch(e => {
-                this.flashMessage.error({title: 'Error Message Title', message: e});
+            "nome": this.clients[0],
+            "rg": this.clients[1],
+            "cpf": this.clients[2],
+
+            }).catch(e => {
+              alert(e);
             }); 
+
+            this.clients = []
+
+            setTimeout(() => {
+              this.saveSuccess = false;
+            }, 5000);
         },
     }
  }
