@@ -1,9 +1,9 @@
 <template>
   <div class="register-form">
-    <form method="post">
+    <form>
         <div class="group">
           <label>Data Entrada / Saída:</label>
-          <date-picker v-model="estadia" range lang="pt-br">{{estadia}}</date-picker>
+          <date-picker v-model="estadia" range lang="pt-br" valueType="format">{{estadia}}</date-picker>
         </div>
         <div class="group">
           <label>Quartos:</label>
@@ -23,7 +23,7 @@
             </option>
           </select>
         </div>
-        <button class="reservation__btn" type="submit">Reservar</button>
+        <button class="reservation__btn" type="submit" @click="getDate()">Reservar</button>
     </form>
   </div>
 </template>
@@ -49,6 +49,8 @@ export default {
         { key: 3, value: '3' },
       ],
       estadia: '',
+      dataEntrada: '',
+      dataSaida: '',
     }
   },
 
@@ -61,6 +63,16 @@ export default {
       this.errors.push(e)
     })
   },
+
+  methods: {
+    getDate() {
+     this.dataEntrada = this.estadia[0];
+     this.dataSaida = this.estadia[1];
+
+     alert(this.dataEntrada);
+     alert(this.dataSaida);
+    }
+  }
 };
 </script>
 
