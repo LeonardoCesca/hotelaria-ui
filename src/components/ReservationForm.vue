@@ -18,7 +18,7 @@
           <label>Cliente:</label>
           <select v-model="selected">
             <option disabled value="">Selecione um cliente já cadastrado</option>
-            <option v-for="client in clients" :key="client.nome">
+            <option v-for="(client,index) in clients" :key="index+1">
               {{client.nome}}
             </option>
           </select>
@@ -41,7 +41,7 @@ export default {
   data(){
     return {
       selected: '',
-      clients: [],
+      clients: [],  
       bedrooms: '',
       rooms: [
         { key: 1, value: '1' },
