@@ -18,14 +18,17 @@
       <span v-if="props.column.field == 'RG'">{{props.row.rg}}</span>
       <span v-if="props.column.field == 'buttons'">
         <button type="button" class="button button-edit" @click="openModal(props.row)" style="margin-right: 20px;"> Editar </button>
-        <button type="button" class="button button-delete" @click="deleteCliente(props.row.cpf)" > Deletar </button>
+        <button type="button" class="button button-delete" @click="openModalDelete(props.row)" > Deletar </button>
+        <modalDelete ref="modalDelete"></modalDelete>
       </span>
       <span v-else>
           {{props.formattedRow[props.column.field]}}
       </span>
     </template>
     </vue-good-table>
-    <modal ref="modal"></modal>
+    <div>
+      <modal ref="modal"></modal>
+    </div>
   </div>
 </template>
 
@@ -35,12 +38,14 @@ import axios from 'axios';
 import { VueGoodTable } from 'vue-good-table'; 
 import 'vue-good-table/dist/vue-good-table.css';
 import modal from './ModalEdit.vue'
+import modalDelete from './ModalDelete.vue'
 
 export default {
   name: 'clients',
   components: {
       VueGoodTable,
       modal,
+      modalDelete
   },
   data(){
     return {
@@ -72,25 +77,14 @@ export default {
     openModal: function (entry) {
       this.$refs.modal.show(entry) 
     },
+    openModalDelete: function (entry) {
+      this.$refs.modalDelete.show(entry) 
+    },
     getClients() {
       return axios.get('https://cadastro-de-cliente.herokuapp.com/customer')
                 .then(response => {
                   this.rows = response.data;
                 });
-    },
-    deleteCliente(cpf) {
-        axios.delete("https://cadastro-de-cliente.herokuapp.com/customer", 
-          {headers: {
-            "Content-Type": "application/json"
-          },
-           data: { cpf }
-        }).catch(e => {
-          alert(e);
-        }); 
-        
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
     }
   }
 };

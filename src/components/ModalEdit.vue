@@ -118,14 +118,14 @@ Vue.use(FlashMessage);
             "cpf": this.clients[2],
 
             }).catch(e => {
-              alert(e);
+              this.flashMessage.success({title: 'Mensagem de Erro', message: e});
             }); 
 
             this.clients = []
 
             setTimeout(() => {
               this.saveSuccess = false;
-            }, 5000);
+            }, 1000);
         },
     }
  }
