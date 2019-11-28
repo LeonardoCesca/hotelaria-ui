@@ -212,7 +212,7 @@ export default {
   display: flex;
   font-size: 14px;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .group > label {
