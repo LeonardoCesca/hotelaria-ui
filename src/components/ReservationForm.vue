@@ -1,9 +1,9 @@
 <template>
   <div class="register-form">
-    <form method="post">
+    <form>
         <div class="group">
           <label>Data Entrada / Saída:</label>
-          <date-picker v-model="estadia" range lang="pt-br">{{estadia}}</date-picker>
+          <date-picker v-model="estadia" range lang="pt-br" valueType="format">{{estadia}}</date-picker>
         </div>
         <div class="group">
           <label>Quartos:</label>
@@ -16,20 +16,21 @@
         </div>
         <div class="group">
           <label>Cliente:</label>
-          <select v-model="clientes">
+          <select v-model="selected">
             <option disabled value="">Selecione um cliente já cadastrado</option>
-            <option v-for="client in clients" :key="client.id">
-              {{client.name}}
+            <option v-for="(client,index) in clients" :key="index+1">
+              {{client.nome}}
             </option>
           </select>
         </div>
-        <button class="reservation__btn" type="submit">Reservar</button>
+        <button class="reservation__btn" type="submit" @click="getDate()">Reservar</button>
     </form>
   </div>
 </template>
 
 
 <script>
+import axios from 'axios';
 import DatePicker from 'vue2-datepicker';
 
 export default {
@@ -39,21 +40,37 @@ export default {
   },
   data(){
     return {
+      selected: '',
+      clients: [],  
       bedrooms: '',
-      clientes: '',
       rooms: [
         { key: 1, value: '1' },
         { key: 2, value: '2' },
         { key: 3, value: '3' },
       ],
       estadia: '',
-      clients: [
-        { id:1, name: "Tom Cruz"},
-        { id:2, name: "Mike Mouse"},
-        { id:3, name: "Mariya Giordani"},
-        { id:4, name: "Will Smith"},
-        { id:5, name: "Jon Jon"},
-      ]
+      dataEntrada: '',
+      dataSaida: '',
+    }
+  },
+
+   created() {
+    axios.get("https://cadastro-de-cliente.herokuapp.com/customer")
+    .then(response => {
+      this.clients = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
+  },
+
+  methods: {
+    getDate() {
+     this.dataEntrada = this.estadia[0];
+     this.dataSaida = this.estadia[1];
+
+     alert(this.dataEntrada);
+     alert(this.dataSaida);
     }
   }
 };
