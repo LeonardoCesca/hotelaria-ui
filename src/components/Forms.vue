@@ -9,7 +9,7 @@
       </div>
       <div class="group">
         <label for="lastname">Sobrenome:</label>
-        <input type="text" name="lastname" placeholder="Digite seu sobrenome" />
+        <input type="text" name="lastname" placeholder="Digite seu sobrenome" v-model="user.lastname"/>
       </div>
       <div class="group">
         <label for="email">* Email:</label>
@@ -28,7 +28,7 @@
         <span class="label-error" v-if="errorClass.phone">{{errors.phone}}</span>
       </div>
       <div class="group">
-        <label for="rg">* RG:</label>
+        <label for="rg" v-mask="'########'">* RG:</label>
         <input type="text" name="rg" placeholder="Digite seu RG" v-model="user.rg" />
         <span class="label-error" v-if="errorClass.rg">{{errors.rg}}</span>
       </div>
@@ -45,7 +45,7 @@
       </div>
       <div class="group">
         <label for="cep">CEP:</label>
-        <input type="text" name="cep" placeholder="Digite o seu CEP" v-model="user.cep" />
+        <input type="text" name="cep" placeholder="Digite o seu CEP" v-model="user.cep" v-mask="'######-##'"/>
       </div>
       <div class="group">
         <label for="address">Endereço:</label>
@@ -68,6 +68,7 @@ export default {
     return {
       user: {
         name: "",
+        lastname: "",
         email: "",
         phone: "",
         rg: "",
@@ -171,6 +172,7 @@ export default {
         !!this.user.cpf
       ) {
         this.user.name = '';
+        this.lastname = '';
         this.user.email = '';
         this.user.phone = '';
         this.user.rg = '';

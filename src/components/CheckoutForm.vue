@@ -18,9 +18,25 @@
         <div class="information" v-if="value !== null">
           <p>Nome : {{value.id}}</p>
           <p>Quantidades de Quartos : {{value.title}}</p>
+          <div style="display: flex; justify-content: space-around;">
           <p>Data Entrada : {{value.userId}}</p>
           <p>Data Saída: {{value.userId}}</p>
+          </div>
           <p>Pagamento: R$ {{value.id}}</p>
+          <table style="width:100%">
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th> 
+            </tr>
+            <tr>
+              <td>Coca Cola</td>
+              <td>Chocolate</td>
+            </tr>
+            <tr>
+              <td>R$ 20</td>
+              <td>R$ 40</td>
+            </tr>
+          </table>
         </div>
     </pre>
     <button class="button" type="submit">Check-out</button>
@@ -34,18 +50,22 @@ import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.min.css";
 
 export default {
-  components: { Multiselect },
-  data() {
-    return {
-      value: null,
-      clients: []
-    };
-  },
-  created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/albums")
-      .then(response => (this.clients = response.data));
-  }
+    components: { Multiselect },
+    data() {
+      return {
+        showModal: true,
+        value: null,
+        clients: []
+      };
+    },
+    created() {
+      axios
+        .get("https://jsonplaceholder.typicode.com/albums")
+        .then(response => (this.clients = response.data));
+    },
+    hide(){
+      this.showModal = false
+    },
 };
 
 </script>
@@ -63,6 +83,7 @@ export default {
   border: 2px solid grey;
   background-color: #f0f8ff;
   border-radius: 8px;
+  padding: 10px;
 }
 
 p {
@@ -83,5 +104,10 @@ p {
   cursor: pointer;
   border-radius: 8px;
   background-color: #4caf50;
+}
+
+table, th, td {
+  border: 1px solid black;
+  font-family: "Times New Roman", Times, serif;
 }
 </style>
