@@ -1,6 +1,6 @@
 <template>
   <div class="register-form">
-    <form>
+    <form @submit.prevent="postData">
         <div class="group">
           <label>Data Entrada / Saída:</label>
           <date-picker v-model="estadia" range lang="pt-br" valueType="format">{{estadia}}</date-picker>
@@ -16,14 +16,14 @@
         </div>
         <div class="group">
           <label>Cliente:</label>
-          <select v-model="selected">
+          <select v-model="nameSelected">
             <option disabled value="">Selecione um cliente já cadastrado</option>
             <option v-for="(client,index) in clients" :key="index+1">
-              {{client.nome}}
+              {{client.name}}
             </option>
           </select>
         </div>
-        <button class="reservation__btn" type="submit" @click="getDate()">Reservar</button>
+        <button class="reservation__btn" type="submit">Reservar</button>
     </form>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
   },
   data(){
     return {
-      selected: '',
+      nameSelected: '',
       clients: [],  
       bedrooms: '',
       rooms: [
@@ -55,9 +55,9 @@ export default {
   },
 
    created() {
-    axios.get("https://cadastro-de-cliente.herokuapp.com/customer")
+    axios.get("http://fadergs-reservation-service.herokuapp.com/costumers")
     .then(response => {
-      this.clients = response.data
+      this.clients = response.data.costumers
     })
     .catch(e => {
       this.errors.push(e)
@@ -65,13 +65,20 @@ export default {
   },
 
   methods: {
-    getDate() {
+    postData() {
      this.dataEntrada = this.estadia[0];
      this.dataSaida = this.estadia[1];
+    
+      axios.post("http://fadergs-reservation-service.herokuapp.com/reservations", {
+        "name": this.nameSelected,
+        "roomsQuantity": this.bedrooms,
+        "checkin": this.dataEntrada,
+        "checkout": this.dataSaida,
 
-     alert(this.dataEntrada);
-     alert(this.dataSaida);
-    }
+      }).catch(e => {
+        this.flashMessage.success({title: 'Mensagem de Erro', message: e});
+      }); 
+    } 
   }
 };
 </script>
