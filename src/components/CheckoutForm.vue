@@ -66,27 +66,27 @@ export default {
     },
     created() {
       axios
-        .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+        .get("https://fadergs-reservation-service.herokuapp.com/reservations/costumers")
         .then(response => {
-          this.clients = response.data.costumers
+          this.clients = response.data.reservations
         });
     },
 
     methods: {
     getCpf() {
         axios
-      .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+      .get("https://fadergs-reservation-service.herokuapp.com/reservations/costumers")
       .then(response => {
-        this.cpf = response.data.costumers[0].cpf
+        this.cpf = response.data.reservations[0].cpf
         this.postData();
       });
     },
 
      getCpfCancel() {
         axios
-      .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+      .get("https://fadergs-reservation-service.herokuapp.com/reservations/costumers")
       .then(response => {
-        this.cpf = response.data.costumers[0].cpf
+        this.cpf = response.data.reservations[0].cpf
         this.cancelCheckout();
       });
     },
