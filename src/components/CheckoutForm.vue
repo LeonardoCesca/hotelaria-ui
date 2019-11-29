@@ -39,7 +39,7 @@
           </table>
         </div>
     </pre>
-    <button class="button" type="submit" style="margin-right: 20px;">Check-out</button>
+    <button class="button" type="submit" style="margin-right: 20px;" @click="getCpf()">Check-out</button>
     <button class="button button-cancelar" type="submit">Cancelar</button>
   </div>
 </template>
@@ -56,13 +56,41 @@ export default {
       return {
         showModal: true,
         value: null,
-        clients: []
+        clients: [],
+        cpf: null,
       };
     },
     created() {
       axios
         .get("https://fadergs-reservation-service.herokuapp.com/costumers")
-        .then(response => (this.clients = response.data.costumers));
+        .then(response => {
+          this.clients = response.data.costumers
+        });
+    },
+
+    methods: {
+      getCpf() {
+         axios
+        .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+        .then(response => {
+          this.cpf = response.data.costumers[0].cpf
+          this.postData();
+        });
+      },
+
+      postData() {
+        this.dataEntrada = this.value.checkin;
+        this.dataSaida = this.value.checkout;
+      
+        axios.post("http://fadergs-reservation-service.herokuapp.com/reservations/checkout", {
+          "checkin": this.dataEntrada,
+          "checkout": this.dataSaida,
+          "cpf": this.cpf,
+
+        }).catch(e => {
+          this.flashMessage.success({title: 'Mensagem de Erro', message: e});
+        });
+      }
     },
     hide(){
       this.showModal = false
