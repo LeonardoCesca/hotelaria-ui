@@ -7,7 +7,7 @@
       v-model="value"
       :options="clients"
       placeholder="Nome do Cliente"
-      label="title"
+      label="name"
       :multiple="false"
     >
       <template slot-scope="{ clients }">
@@ -16,13 +16,13 @@
     </multiselect>
     <pre class="language-json">
         <div class="information" v-if="value !== null">
-          <p>Nome : {{value.id}}</p>
-          <p>Quantidades de Quartos : {{value.title}}</p>
+          <p>Nome : {{value.name}}</p>
+          <p>Quantidades de Quartos : {{value.roomsQuantity}}</p>
           <div style="display: flex; justify-content: space-around;">
-          <p>Data Entrada : {{value.userId}}</p>
-          <p>Data Saída: {{value.userId}}</p>
+          <p>Data Entrada : {{value.checkin}}</p>
+          <p>Data Saída: {{value.checkout}}</p>
           </div>
-          <p>Pagamento: R$ {{value.id}}</p>
+          <p>Pagamento: R$ {{value.payment}}</p>
           <table style="width:100%">
             <tr>
               <th>Produto</th>
@@ -60,8 +60,8 @@ export default {
     },
     created() {
       axios
-        .get("https://jsonplaceholder.typicode.com/albums")
-        .then(response => (this.clients = response.data));
+        .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+        .then(response => (this.clients = response.data.costumers));
     },
     hide(){
       this.showModal = false
