@@ -28,6 +28,7 @@
 
 
 <script>
+import axios from 'axios';
 import { VueGoodTable } from 'vue-good-table'; 
 import 'vue-good-table/dist/vue-good-table.css';
 import modal from './ModalDetails.vue'
@@ -43,13 +44,13 @@ export default {
       columns: [
         {
           label: 'Data de Entrada',
-          field: 'dataEntrada',
+          field: 'checkin',
           dateInputFormat: 'yyyy-MM-dd', // expects 2018-03-16
           dateOutputFormat: 'dd-MM-yyyy', // outputs Mar 16th 2018
         },
         {
           label: 'Data de Saida',
-          field: 'dataSaida',
+          field: 'checkout',
           dateInputFormat: 'yyyy-MM-dd', // expects 2018-03-16
           dateOutputFormat: 'dd-MM-yyyy', // outputs Mar 16th 2018
         },
@@ -59,25 +60,28 @@ export default {
         },
         {
           label: 'Numero de Quartos',
-          field: 'quartos',
+          field: 'roomsQuantity',
         },
         {
           label: 'Ações',
           field: 'buttons',
         },
       ],
-      rows: [
-        { id:1, name: "Tom Cruz", quartos: "1", dataEntrada: "2019-11-20", dataSaida: "2019-11-22", buttons: "" },
-        { id:2, name: "Mike Mouse", quartos: "1", dataEntrada: "2019-11-21", dataSaida: "2019-11-27", buttons: ""},
-        { id:3, name: "Mariya Giordani",quartos: "4", dataEntrada: "2019-11-30", dataSaida: "2019-12-22", buttons: ""},
-        { id:4, name: "Will Smith",quartos: "5", dataEntrada: "2019-11-10", dataSaida: "2019-11-22", buttons: ""},
-        { id:5, name: "Jon Jon", quartos: "6", dataEntrada: "2019-11-04", dataSaida: "2019-11-20", buttons: ""},
-      ],
+      rows: [],
     };
+  },
+  mounted() {
+    this.getReservations();
   },
   methods: {
     openModal: function (entry) {
       this.$refs.modal.show(entry) 
+    },
+    getReservations() {
+      return axios.get('http://fadergs-reservation-service.herokuapp.com/reservations')
+        .then(response => {
+          this.rows = response.data.reservations;
+        });
     }
   }
 };
