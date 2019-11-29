@@ -29,13 +29,9 @@
               <th>Produto</th>
               <th>Preço</th> 
             </tr>
-            <tr>
-              <td>Coca Cola</td>
-              <td>Chocolate</td>
-            </tr>
-            <tr>
-              <td>R$ 20</td>
-              <td>R$ 40</td>
+            <tr v-for="(val, index) in value.products" :key="index+1">
+              <td>{{val.description}}</td>
+              <td>{{val.price}}</td>
             </tr>
           </table>
         </div>
