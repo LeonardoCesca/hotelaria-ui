@@ -1,5 +1,6 @@
 <template>
   <div class="checkin-form">
+    <FlashMessage></FlashMessage>
     <label class="typo__label">
       <p>Efetuar Check-out</p>
     </label>
@@ -39,8 +40,8 @@
           </table>
         </div>
     </pre>
-    <button class="button" type="submit" style="margin-right: 20px;">Check-out</button>
-    <button class="button button-cancelar" @click="cancelData(value)" type="submit">Cancelar</button>
+    <button class="button" type="submit" style="margin-right: 20px;" @click="getCpf()">Check-out</button>
+    <button class="button button-cancelar" @click="getCpfCancel()" type="submit">Cancelar</button>
   </div>
 </template>
 
@@ -49,6 +50,9 @@
 import axios from "axios";
 import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.min.css";
+import Vue from 'vue';
+import FlashMessage from '@smartweb/vue-flash-message';
+Vue.use(FlashMessage);
 
 export default {
     components: { Multiselect },
@@ -56,25 +60,67 @@ export default {
       return {
         showModal: true,
         value: null,
-        clients: []
+        clients: [],
+        cpf: null,
       };
     },
     created() {
       axios
         .get("https://fadergs-reservation-service.herokuapp.com/costumers")
-        .then(response => (this.clients = response.data.costumers));
+        .then(response => {
+          this.clients = response.data.costumers
+        });
+    },
+
+    methods: {
+    getCpf() {
+        axios
+      .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+      .then(response => {
+        this.cpf = response.data.costumers[0].cpf
+        this.postData();
+      });
+    },
+
+     getCpfCancel() {
+        axios
+      .get("https://fadergs-reservation-service.herokuapp.com/costumers")
+      .then(response => {
+        this.cpf = response.data.costumers[0].cpf
+        this.cancelCheckout();
+      });
+    },
+
+    postData() {
+      this.dataEntrada = this.value.checkin;
+      this.dataSaida = this.value.checkout;
+    
+      axios.post("http://fadergs-reservation-service.herokuapp.com/reservations/checkout", {
+        "checkin": this.dataEntrada,
+        "checkout": this.dataSaida,
+        "cpf": this.cpf,
+
+      }).catch(e => {
+        return this.flashMessage.success({title: 'Mensagem de Erro', message: e});
+      });
+      this.flashMessage.success({title: 'Mensagem de Sucesso', message: 'Check-out efetuado com successo!'});
+    }
     },
     hide(){
       this.showModal = false
     },
-    cancelData(client) {
+    cancelCheckout() {
+      this.dataEntrada = this.value.checkin;
+      this.dataSaida = this.value.checkout;
+
       axios.post("http://fadergs-reservation-service.herokuapp.com/reservations/cancel", {
-        "cpf": client.cpf,
-        "checkin": client.checkin,
-        "checkout": client.checkout,
+        "checkin": this.dataEntrada,
+        "checkout": this.dataSaida,
+        "cpf": this.cpf,
       }).catch(e => {
-        this.flashMessage.success({title: 'Mensagem de Erro', message: e});
+        return this.flashMessage.success({title: 'Mensagem de Erro', message: e});
       });
+      this.flashMessage.success({title: 'Mensagem de Sucesso', message: 'Check-out cancelado com successo!'});
     }
 };
 
