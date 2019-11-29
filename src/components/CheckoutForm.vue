@@ -40,7 +40,7 @@
         </div>
     </pre>
     <button class="button" type="submit" style="margin-right: 20px;">Check-out</button>
-    <button class="button button-cancelar" type="submit">Cancelar</button>
+    <button class="button button-cancelar" @click="cancelData(value)" type="submit">Cancelar</button>
   </div>
 </template>
 
@@ -67,6 +67,15 @@ export default {
     hide(){
       this.showModal = false
     },
+    cancelData(client) {
+      axios.post("http://fadergs-reservation-service.herokuapp.com/reservations/cancel", {
+        "cpf": client.cpf,
+        "checkin": client.checkin,
+        "checkout": client.checkout,
+      }).catch(e => {
+        this.flashMessage.success({title: 'Mensagem de Erro', message: e});
+      });
+    }
 };
 
 </script>
