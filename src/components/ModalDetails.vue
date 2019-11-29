@@ -4,9 +4,9 @@
         <p> Detalhes Cadastro do Cliente </p>
         <div id="client">
           <p>Nome : {{client.name}}</p>
-          <p>Quantidades de Quartos : {{client.quartos}}</p>
-          <p>Data Entrada : {{client.dataEntrada}}</p>
-          <p>Data Saída: {{client.dataSaida}}</p>
+          <p>Quantidades de Quartos : {{client.roomsQuantity}}</p>
+          <p>Data Entrada : {{client.checkin}}</p>
+          <p>Data Saída: {{client.checkout}}</p>
         </div>
       <button class="button" @click="hide">Fechar</button>
     </div> 

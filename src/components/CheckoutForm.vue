@@ -39,7 +39,8 @@
           </table>
         </div>
     </pre>
-    <button class="button" type="submit">Check-out</button>
+    <button class="button" type="submit" style="margin-right: 20px;">Check-out</button>
+    <button class="button button-cancelar" type="submit">Cancelar</button>
   </div>
 </template>
 
@@ -104,6 +105,10 @@ p {
   cursor: pointer;
   border-radius: 8px;
   background-color: #4caf50;
+}
+
+.button-cancelar {
+  background-color: #f44336;
 }
 
 table, th, td {
