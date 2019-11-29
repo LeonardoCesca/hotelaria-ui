@@ -77,8 +77,16 @@ export default {
 
       }).catch(e => {
         this.flashMessage.success({title: 'Mensagem de Erro', message: e});
-      }); 
-    } 
+      });
+      
+      this.clearForm();
+    },
+    clearForm() {
+      this.nameSelected = '';
+      this.bedrooms = '';
+      this.dataEntrada = '';
+      this.dataSaida = '';
+    }
   }
 };
 </script>
