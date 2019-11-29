@@ -139,7 +139,7 @@ export default {
       ) {
         this.save();
         this.scrollToBottom();
-        this.flashMessage.success({title: 'Mensagem de Sucesso', message: 'Cliente está cadstrado com sucesso!'});
+        this.flashMessage.success({title: 'Mensagem de Sucesso', message: 'Cliente cadastrado com sucesso!'});
         this.clearForm();
       }
     },

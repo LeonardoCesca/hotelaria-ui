@@ -1,5 +1,6 @@
 <template>
   <div class="register-form">
+    <FlashMessage></FlashMessage>
     <form @submit.prevent="postData">
         <div class="group">
           <label>Data Entrada / Saída:</label>
@@ -31,7 +32,10 @@
 
 <script>
 import axios from 'axios';
+import Vue from 'vue';
 import DatePicker from 'vue2-datepicker';
+import FlashMessage from '@smartweb/vue-flash-message';
+Vue.use(FlashMessage);
 
 export default {
   name: 'register-form',
@@ -80,6 +84,8 @@ export default {
       });
       
       this.clearForm();
+      this.flashMessage.success({title: 'Mensagem de Sucesso', message: 'Reserva Efetivada!'});
+
     },
     clearForm() {
       this.nameSelected = '';
